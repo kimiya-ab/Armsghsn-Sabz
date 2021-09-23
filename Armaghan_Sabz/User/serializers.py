@@ -38,12 +38,13 @@ class VerificationSerializer(serializers.Serializer):
         return {'phone':validated_data['phone'], 'code': 'code is not correct'}
 
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create(
         username = str(validated_data['first_name']) + ' ' + str(validated_data['last_name']) ,
-        name = validated_data['first_name'],
-        family = validated_data['last_name'],
+        name = validated_data['name'],
+        last_name = validated_data['family'],
         identity_code = validated_data['identity_code'],
         # password = make_password(validated_data['password']), 
         phone_number=validated_data['phone_number'],
@@ -51,8 +52,17 @@ class RegisterSerializer(serializers.ModelSerializer):
         serial_number = validated_data['serial_number'],
         address = validated_data['address'],
         education = validated_data['education'],
-        grade = validated_data['grade'],)
+        grade = validated_data['grade'],
+        support_phone_number =validated_data['support_phone_number'],
+        post_cod = validated_data['post_cod'],
+        landline = validated_data['landline'],
+        cod_zip = validated_data['cod_zip'],
+        profession = validated_data['profession'],
+        workplace_address = validated_data['workplace_address'],
+        job_position =validated_data['job_position'],
+        workplace_number = validated_data['workplace_number'],)
         return user
+
 
     class Meta:
         model = User
@@ -61,7 +71,15 @@ class RegisterSerializer(serializers.ModelSerializer):
             'password':{'write_only': True},
         }     
 
+
     
+# class LoginSerializer(serializers.ModelSerializer):
+#     def validate(self, validated_data):
+
+#         if User.objects.filter(phone=validated_data['phone_number'] ):
+#     return validated_data
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -69,6 +87,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password':{'write_only': True},
         }    
+
 
 
 class EditProfileUserSerializer(serializers.ModelSerializer):
@@ -98,6 +117,7 @@ class CustomJWTSerializer(TokenObtainPairSerializer):
         return super().validate(credentials)
       
 
+
 # forget pass send code with phone/email
 class ForgetPassSerializer(serializers.Serializer):
     phone = serializers.fields.IntegerField(unique= True)
@@ -106,6 +126,7 @@ class ForgetPassSerializer(serializers.Serializer):
         print(validated_data)
         make_forget_code(validated_data['phone'])
         return validated_data
+
 
 
 # check sms code with entiry code for login
@@ -123,6 +144,8 @@ class VerificationForgetSerializer(serializers.Serializer):
             return validated_data
         
         return {'phone':validated_data['phone'], 'code': 'code is not correct'}
+
+
 
 
 # update password after get code 
@@ -153,6 +176,7 @@ class VerifyPhoneNumberOrEmailSerializer(serializers.Serializer):
         return validated_data
 
 
+
 class UpdatePhoneNumberSerializer(serializers.ModelSerializer):
     code = serializers.CharField(max_length=5)
 
@@ -172,5 +196,3 @@ class UpdatePhoneNumberSerializer(serializers.ModelSerializer):
             return super().update(instance, validated_data)
         
         return {'phone_number':validated_data['phone_number'], 'code': 'code is not correct'}
-
-        

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db import models
 from rest_framework import serializers
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, permissions
-from .serializers import    (EditProfileUserSerializer, UpdatePassSerializer, 
+from .serializers import    (EditProfileUserSerializer, LoginSerializer, UpdatePassSerializer, 
                             VerificationForgetSerializer, 
                             ForgetPassSerializer, 
                             RegisterSerializer, 
@@ -33,7 +33,9 @@ class VerificationApi(CreateAPIView):
 class RegisterApi(CreateAPIView):
     serializer_class = RegisterSerializer
 
-    
+
+# class LoginApi(CreateAPIView):
+#     serializer_class = LoginSerializer    
 
 class UserListView(ListAPIView):
     permission_classes = (IsAdminUser,)
@@ -57,6 +59,12 @@ class EditProfileView(UpdateAPIView):
 
 
 
+class EditPhoneNumberApiView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UpdatePhoneNumberSerializer
+    queryset = User.objects.all()
+
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomJWTSerializer
 
@@ -71,16 +79,6 @@ class VerificationForgetApi(CreateAPIView):
     serializer_class =  VerificationForgetSerializer
  
 
-# change pass with email lookup
-class UpdatePassApiView(UpdateAPIView):
-    serializer_class = UpdatePassSerializer
-    lookup_field = 'email'
-
-    def get_queryset(self):
-        query= (str(self.request).split('/'))
-        return User.objects.filter(email=query[3])
-
-
 #change pass with phone_number
 class UpdatePassPhoneApiView(UpdateAPIView):
     serializer_class = UpdatePassSerializer
@@ -90,16 +88,3 @@ class UpdatePassPhoneApiView(UpdateAPIView):
         query= (str(self.request).split('/'))
         return User.objects.filter(phone_number = str(query[3]))
     
-
-class LoginList(CreateAPIView):
-    permission_classes = (IsAuthenticated,)
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
- 
-    def perform_create(self, serializer):
-        serializer.save(poster=self.request.user)
-
-
-
-
