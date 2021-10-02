@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'Site',
+    'Site',
     'User',
     'rest_framework',
     # 'rest_framework_simplejwt',
@@ -120,6 +120,8 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 # REDIS_HOST = 'localhost'
 # REDIS_PORT = 6379
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
 
 
 LANGUAGE_CODE = 'en-us'

@@ -2,7 +2,7 @@ from enum import unique
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import  User
+from .models import Profile
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .utils import make_verification_code, verification, make_forget_code, verify_code_update
@@ -41,7 +41,7 @@ class VerificationSerializer(serializers.Serializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
-        user = User.objects.create(
+        user = Profile.objects.create(
         username = str(validated_data['first_name']) + ' ' + str(validated_data['last_name']) ,
         name = validated_data['name'],
         last_name = validated_data['family'],
@@ -65,7 +65,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = User
+        model = Profile
         fields = ('id', 'name', 'family', 'identity_code', 'phone_number', 'id_number', 'serial_number', 'address')
         extra_kwargs = {
             'password':{'write_only': True},
@@ -73,16 +73,17 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
     
-# class LoginSerializer(serializers.ModelSerializer):
-#     def validate(self, validated_data):
+class LoginSerializer(serializers.ModelSerializer):
+    def validate(self, validated_data):
 
-#         if User.objects.filter(phone=validated_data['phone_number'] ):
-#     return validated_data
+        if Profile.objects.filter(phone=validated_data['phone_number'] ):
+            pass
+        return validated_data
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Profile
         fields = '__all__'
         extra_kwargs = {
             'password':{'write_only': True},
@@ -92,7 +93,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class EditProfileUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Profile
         fields = ['name', 'fam,ily']
         extra_kwargs = {
             'password':{'write_only': True},
@@ -109,7 +110,7 @@ class CustomJWTSerializer(TokenObtainPairSerializer):
             'phone_number': '',
             'password': attrs.get("password")
         }
-        user_obj = User.objects.filter(phone_number=attrs.get("phone_number")).first()
+        user_obj = Profile.objects.filter(phone_number=attrs.get("phone_number")).first()
 
         if user_obj:
             credentials['phone_number'] = user_obj.phone_number
@@ -120,7 +121,7 @@ class CustomJWTSerializer(TokenObtainPairSerializer):
 
 # forget pass send code with phone/email
 class ForgetPassSerializer(serializers.Serializer):
-    phone = serializers.fields.IntegerField(unique= True)
+    phone = serializers.IntegerField()
 
     def create(self, validated_data):
         print(validated_data)
@@ -131,7 +132,7 @@ class ForgetPassSerializer(serializers.Serializer):
 
 # check sms code with entiry code for login
 class VerificationForgetSerializer(serializers.Serializer):
-    phone = serializers.fields.IntegerField(unique= True)
+    phone = serializers.IntegerField()
     code = serializers.CharField(max_length=5)
     
     def create(self, validated_data):
@@ -153,7 +154,7 @@ class UpdatePassSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(max_length=8)
 
     class Meta:
-        model = User
+        model = Profile
         fields = ['password', 'confirm_password']
 
     def update(self, instance, validated_data):
@@ -168,7 +169,7 @@ class UpdatePassSerializer(serializers.ModelSerializer):
 
 # send code with sms/email for varify
 class VerifyPhoneNumberOrEmailSerializer(serializers.Serializer):
-    phone = serializers.fields.IntegerField(unique= True)
+    phone = serializers.IntegerField()
 
     def create(self, validated_data):
         print(validated_data)
@@ -181,7 +182,7 @@ class UpdatePhoneNumberSerializer(serializers.ModelSerializer):
     code = serializers.CharField(max_length=5)
 
     class Meta:
-        model = User
+        model = Profile
         fields = ['phone_number', 'code']
 
     def update(self, instance, validated_data):

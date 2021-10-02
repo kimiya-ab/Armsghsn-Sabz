@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db import models
 from rest_framework import serializers
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, permissions
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
 from .serializers import    (EditProfileUserSerializer, LoginSerializer, UpdatePassSerializer, 
                             VerificationForgetSerializer, 
                             ForgetPassSerializer, 
@@ -10,15 +10,14 @@ from .serializers import    (EditProfileUserSerializer, LoginSerializer, UpdateP
                             CustomJWTSerializer,
                             PhoneNumberSerializer, 
                             VerificationSerializer,
-                            CreditCardSerializers,
                             VerifyPhoneNumberOrEmailSerializer,
                             UpdatePhoneNumberSerializer,
 
                             )
-from .models import User
+from .models import Profile
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+# from django.contrib.auth.models import User
 
 # for making code and send sms
 class PhoneNumberApi(CreateAPIView):
@@ -39,21 +38,21 @@ class RegisterApi(CreateAPIView):
 
 class UserListView(ListAPIView):
     permission_classes = (IsAdminUser,)
-    queryset = User.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'pk'
 
 
 class ProfileView(RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
-    queryset = User.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'pk'
 
 
 class EditProfileView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
-    queryset = User.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = EditProfileUserSerializer
     lookup_field ='pk'
 
@@ -62,7 +61,7 @@ class EditProfileView(UpdateAPIView):
 class EditPhoneNumberApiView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdatePhoneNumberSerializer
-    queryset = User.objects.all()
+    queryset = Profile.objects.all()
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -86,5 +85,5 @@ class UpdatePassPhoneApiView(UpdateAPIView):
 
     def get_queryset(self):
         query= (str(self.request).split('/'))
-        return User.objects.filter(phone_number = str(query[3]))
+        return Profile.objects.filter(phone_number = str(query[3]))
     

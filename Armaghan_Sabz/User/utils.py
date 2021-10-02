@@ -2,7 +2,7 @@ import redis
 from Armaghan_Sabz.settings import REDIS_PORT, REDIS_HOST, Kavenegar_KEY
 from random import randint
 from kavenegar import *
-from .models import User
+from .models import Profile
 
 
 rdis = redis.StrictRedis(host=REDIS_HOST,port=REDIS_PORT, db=0)
