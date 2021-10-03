@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'Armaghan_Sabz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aspower_db.armaghan_sabz',
+        'NAME': 'aspower_armaghan',
         'HOST': 'localhost',
         'PORT': '28',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'aspower_aspower',
+        'PASSWORD': 'zoLk@t64KyV1',
     }
 }
 
