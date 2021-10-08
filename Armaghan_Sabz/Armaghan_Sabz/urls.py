@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include , include
 from User import urls as User_urls
+from ChekList import urls 
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('User.urls')),
+    path('ChekList/', include('ChekList.urls')),
 ]

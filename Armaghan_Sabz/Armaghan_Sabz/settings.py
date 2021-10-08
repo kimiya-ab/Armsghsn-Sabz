@@ -26,7 +26,12 @@ Kavenegar_KEY = '56576C53586979663075547A592F59464A6378515346386A38386658394D4E6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost','127.0.0.1'
+    # 'http://localhost:80',
+    # 'http://127.0.0.1',
+    # 'https://0ae9-2-191-217-196.ngrok.io',
+]
 
 
 # Application definition
@@ -38,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Site',
     'User',
+    'ChekList',
     'rest_framework',
     # 'rest_framework_simplejwt',
     # 'rest_framework_simplejwt.token_blacklist',
@@ -82,12 +87,14 @@ WSGI_APPLICATION = 'Armaghan_Sabz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aspower_armaghan',
-        'HOST': 'localhost',
-        'PORT': '28',
-        'USER': 'aspower_aspower',
-        'PASSWORD': 'zoLk@t64KyV1',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'aspower_armaghan',
+        # 'HOST': 'localhost',                 
+        # 'PORT': '3306',  
+        # 'USER': 'aspower_aspower',
+        # 'PASSWORD': 'zoLk@t64KyV1',
     }
 }
 
