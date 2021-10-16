@@ -9,7 +9,6 @@ urlpatterns = [
     path('ReportDelete//<int:pk>/' ,  ReportView.as_view({'get':'destory',})),
     path('ReportUpdate//<int:pk>/' ,  ReportView.as_view({'get':'retrieve',})),
 
-
     path('ArchiveList/' ,  ArchiveListView.as_view()),
     path('ArchiveCreate/' ,   ArchiveCreateView.as_view()),
 

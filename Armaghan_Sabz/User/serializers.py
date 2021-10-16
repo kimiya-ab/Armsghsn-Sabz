@@ -42,31 +42,30 @@ class VerificationSerializer(serializers.Serializer):
 class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = Profile.objects.create(
-        username = str(validated_data['first_name']) + ' ' + str(validated_data['last_name']) ,
         name = validated_data['name'],
-        last_name = validated_data['family'],
+        family = validated_data['family'],
         identity_code = validated_data['identity_code'],
-        # password = make_password(validated_data['password']), 
+        password = make_password(validated_data['password']), 
         phone_number=validated_data['phone_number'],
         id_number = validated_data['id_number'],
         serial_number = validated_data['serial_number'],
-        address = validated_data['address'],
-        education = validated_data['education'],
-        grade = validated_data['grade'],
-        support_phone_number =validated_data['support_phone_number'],
-        post_cod = validated_data['post_cod'],
-        landline = validated_data['landline'],
-        cod_zip = validated_data['cod_zip'],
-        profession = validated_data['profession'],
-        workplace_address = validated_data['workplace_address'],
-        job_position =validated_data['job_position'],
-        workplace_number = validated_data['workplace_number'],)
+        address = validated_data['address'],)
+        # education = validated_data['education'],
+        # grade = validated_data['grade'],
+        # support_phone_number =validated_data['support_phone_number'],
+        # post_cod = validated_data['post_cod'],
+        # landline = validated_data['landline'],
+        # cod_zip = validated_data['cod_zip'],
+        # profession = validated_data['profession'],
+        # workplace_address = validated_data['workplace_address'],
+        # job_position =validated_data['job_position'],
+        # workplace_number = validated_data['workplace_number'],)
         return user
 
 
     class Meta:
         model = Profile
-        fields = ('id', 'name', 'family', 'identity_code', 'phone_number', 'id_number', 'serial_number', 'address')
+        fields = ('name','family','identity_code','password','phone_number','id_number','serial_number','address')
         extra_kwargs = {
             'password':{'write_only': True},
         }     
@@ -94,7 +93,7 @@ class UserSerializer(serializers.ModelSerializer):
 class EditProfileUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['name', 'fam,ily']
+        fields = ['name', 'family']
         extra_kwargs = {
             'password':{'write_only': True},
         }     

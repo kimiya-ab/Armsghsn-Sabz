@@ -17,7 +17,10 @@ def make_verification_code(phone_number):
 
     try:
       
-        api = KavenegarAPI(Kavenegar_KEY)
+                # test api with mykey(kimiya)
+        # api = KavenegarAPI('514E6D347148396A577234665748586B58484644477748524432497338524B6E41573334485A4E683845303D')
+        
+        api = KavenegarAPI('514E6D347148396A577234665748586B58484644477748524432497338524B6E41573334485A4E683845303D')
         params = {
             'sender': '10004346',#optional
             'receptor': '+98' + str(pn),#multiple mobile number, split by comma
@@ -53,14 +56,14 @@ def make_forget_code(phone):
     if(len(phone) == 11):
         print('phone')
         phone = phone
-        user = User.objects.filter(phone_number=phone)
+        user = Profile.objects.filter(phone_number=phone)
 
         if len(user) > 0 :
             pn = phone[1:]
             rdis.set(pn, code, 120)
 
             try:
-                api = KavenegarAPI(Kavenegar_KEY)
+                api = KavenegarAPI('514E6D347148396A577234665748586B58484644477748524432497338524B6E41573334485A4E683845303D')
                 params = {
                     'sender': '10004346',#optional
                     'receptor': '+98' + str(pn),#multiple mobile number, split by comma
@@ -90,7 +93,7 @@ def verify_code_update(phone):
         rdis.set(pn, code, 120)
 
         try:
-            api = KavenegarAPI(Kavenegar_KEY)
+            api = KavenegarAPI('514E6D347148396A577234665748586B58484644477748524432497338524B6E41573334485A4E683845303D')
             params = {
                 'sender': '10004346',#optional
                 'receptor': '+98' + str(pn),#multiple mobile number, split by comma

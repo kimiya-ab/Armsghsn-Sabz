@@ -27,10 +27,13 @@ Kavenegar_KEY = '56576C53586979663075547A592F59464A6378515346386A38386658394D4E6
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost','127.0.0.1'
+    '*',
+    # 'localhost',
+    # '127.0.0.1',
+    # '0.0.0.0',
     # 'http://localhost:80',
     # 'http://127.0.0.1',
-    # 'https://0ae9-2-191-217-196.ngrok.io',
+    # 'https://78e8-2-190-140-246.ngrok.io',
 ]
 
 
@@ -46,8 +49,8 @@ INSTALLED_APPS = [
     'User',
     'ChekList',
     'rest_framework',
-    # 'rest_framework_simplejwt',
-    # 'rest_framework_simplejwt.token_blacklist',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 
 ]
 
@@ -92,7 +95,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'aspower_armaghan',
         # 'HOST': 'localhost',                 
-        # 'PORT': '3306',  
+        # 'PORT': '3307',  
         # 'USER': 'aspower_aspower',
         # 'PASSWORD': 'zoLk@t64KyV1',
     }
@@ -129,8 +132,7 @@ REST_FRAMEWORK = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
-# REDIS_HOST = 'localhost'
-# REDIS_PORT = 6379
+
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 

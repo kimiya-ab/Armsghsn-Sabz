@@ -13,15 +13,15 @@ class Report(models.Model):
 
 
 class Archive(models.Model):
-    name = models.ForeignKey(Profile , on_delete=models.CASCADE)
+    name = models.ForeignKey(Profile , default=None, null=True, on_delete=models.CASCADE)
     time = models.DateTimeField()
     date = models.DateField(auto_now_add=True)
     STATUSE_CHOICE = (
-        ('saturday','Saturday'),
-        ('sunday','Sunday'),
+        ('saturday','SATURDAY'),
+        ('sunday','SUNDAY'),
         ('monday','Mondaye'),
-        ('thusday','Thusday'),
-        ('wendsday', 'WENDSDAY'),
+        ('tuesday','THUESDAYE'),
+        ('wednesday', 'WEDNSEDAY'),
         ('thursday', 'THURSDAY'),
         ('friday' , 'FRIDAY'),
     )
