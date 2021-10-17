@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,13 +28,11 @@ Kavenegar_KEY = '56576C53586979663075547A592F59464A6378515346386A38386658394D4E6
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*',
-    # 'localhost',
-    # '127.0.0.1',
-    # '0.0.0.0',
-    # 'http://localhost:80',
-    # 'http://127.0.0.1',
-    # 'https://78e8-2-190-140-246.ngrok.io',
+
+    'localhost',
+    '127.0.0.1',
+    'aspower.ir',    
+
 ]
 
 
@@ -152,6 +151,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/aspoweri/public_html/static'
+MEDIA_ROOT = '/home/aspoweri/public_html/media'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'), ]
+
+# STATICFILES_DIRS = ( 
+#       'C:/Users/ASUS/Desktop/Swan Tech/Armaghan Sabz/',  
+# )
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

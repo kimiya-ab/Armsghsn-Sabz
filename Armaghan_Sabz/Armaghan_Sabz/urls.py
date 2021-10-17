@@ -18,6 +18,7 @@ from django.urls import path
 from django.urls.conf import include , include
 from User import urls as User_urls
 from ChekList import urls 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -25,3 +26,6 @@ urlpatterns = [
     path('', include('User.urls')),
     path('ChekList/', include('ChekList.urls')),
 ]
+
+
+urlpatterns += staticfiles_urlpatterns()
