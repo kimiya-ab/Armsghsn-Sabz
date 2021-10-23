@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User
+from django.contrib.auth.models import User
 
 
 class MyUserManager(BaseUserManager):
@@ -20,7 +20,7 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(username, phone_number, password, **other_fields)
 
-    def create_user(self, email, username, phone_number, password, **other_fields):
+    def create_user(self, username, phone_number, password, **other_fields):
 
         username = phone_number
         User = self.model(username=username,
@@ -31,13 +31,13 @@ class MyUserManager(BaseUserManager):
 
 
 class Profile(AbstractBaseUser , PermissionsMixin):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50 , default=None, null=True)
     family = models.CharField(max_length=50)
     identity_code = models.IntegerField()
     id_number = models.IntegerField()
     serial_number = models.IntegerField()
     address = models.CharField(max_length=500 , unique=True)
-    post_cod = models.IntegerField()
+    post_cod = models.IntegerField(default=None)
     landline = models.IntegerField()
     phone_number = models.IntegerField(unique=True)
     support_phone_number = models.IntegerField()
