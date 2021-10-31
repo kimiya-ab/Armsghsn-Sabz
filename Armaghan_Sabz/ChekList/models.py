@@ -5,7 +5,7 @@ from User.models import Profile
 
 class Report(models.Model):
     title = models.CharField(max_length=100)
-    subtitlr = models.CharField(max_length=300)
+    subtitle = models.CharField(max_length=300)
     content = models.CharField(max_length=500)
     date = models.DateField(auto_now_add=True)
     time = models.DateTimeField()
@@ -26,3 +26,15 @@ class Archive(models.Model):
         ('friday' , 'FRIDAY'),
     )
     status = models.CharField(max_length=10,choices=STATUSE_CHOICE)
+
+
+
+
+class Parameter(models.Model):
+    title = models.CharField(max_length=100)
+    subtitle = models.CharField(max_length=300)
+    category = models.CharField(max_length=50)
+    content = models.CharField(max_length=500)
+    date = models.DateField(auto_now_add=True)
+    time = models.DateTimeField()
+

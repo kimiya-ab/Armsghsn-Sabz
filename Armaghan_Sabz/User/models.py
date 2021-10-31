@@ -48,8 +48,14 @@ class Profile(AbstractBaseUser , PermissionsMixin):
     workplace_address = models.CharField(max_length=250)
     job_position = models.CharField(max_length=250)
     workplace_number = models.CharField(max_length=250)
+    permission = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'phone_number'
     
     def __str__(self):
         return self.phone_number
+
+
+class OTP(models.Model):
+    phone_number = models.IntegerField()
+    code = models.IntegerField(null=True)

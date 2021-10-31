@@ -1,13 +1,17 @@
 from django.urls import path
+from django.views.generic.base import View
+from rest_framework import views
 from .views import *
 from .serializers import CustomJWTSerializer
 from rest_framework_simplejwt.views import (TokenObtainPairView , TokenRefreshView)
+from . import views
 
 
 
 urlpatterns = [
     path('phone/', PhoneNumberApi.as_view(), name='register-phone'),
-    path('phone/<str:phone_number>/', VerificationApi.as_view(), name='varification-code'),
+    # path('phone/<str:phone_number>/', VerificationApi.as_view(), name='varification-code'),
+    path('otp/', views.verificationApi),
     path('phone/<str:phone_number>/register/', RegisterApi.as_view(), name='register-user'),
     path('register/', RegisterApi.as_view(), name='register'),
     path('user/', UserListView.as_view(), name='all-user'),

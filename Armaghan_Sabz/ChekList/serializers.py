@@ -13,3 +13,10 @@ class ArchiveSerializer(serializers.ModelSerializer):
      class Meta:
         fields = '__all__'
         model = Archive        
+
+
+
+class ParameterSerializer(serializers.ModelSerializer):
+   class Meta:
+      fields = '__all__'
+      model = Parameter

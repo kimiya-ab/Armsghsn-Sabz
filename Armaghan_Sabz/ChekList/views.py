@@ -22,3 +22,13 @@ class ArchiveListView(generics.ListAPIView):
 class ArchiveCreateView(generics.CreateAPIView):
     queryset = Archive.objects.all()
     serializer_class = ArchiveSerializer    
+
+
+class ParameterCreateView(generics.CreateAPIView):
+    queryset = Parameter.objects.all()
+    serializer_class = ParameterSerializer
+
+
+class ParameterListView(generics.ListAPIView):
+    queryset = Parameter.objects.all()
+    serializer_class = ParameterSerializer       

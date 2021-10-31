@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-REDIS_HOST = 'localhost'
+REDIS_HOST = 'aspoweri.ir'
 REDIS_PORT = 6379
 
 
